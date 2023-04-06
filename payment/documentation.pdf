@@ -1,0 +1,32 @@
+________REGISTER__________
+
+--> request
+http://localhost:5000/api/register
+
+{
+    "firstName":"obaro",
+    "lastName":"paul",
+    "email":"admin@mail.com",
+    "password":"123456"
+}
+
+--> response
+{
+"registration successful"
+}
+
+
+--> request
+http://localhost:5000/api/register
+
+{
+    "firstName":"obaro",
+    "lastName":"paul",
+    "email":"admin@mail.com",
+    "password":"123456"
+}
+
+--> response
+{
+"registration successful"
+}
