@@ -10,7 +10,7 @@ route.post("/api/signup", async (req: Request, res: Response) => {
   try {
     const { firstName, lastName, email, pin, password } = req.body;
     const existingUser = await User.findOne({ where: { email } });
-    const token:string = gen(10)
+    const account_number:string = gen(10)
   
     if (existingUser) return res.status(400).json("email already taken");
     const salt = bcrypt.genSaltSync(10);
@@ -22,7 +22,7 @@ route.post("/api/signup", async (req: Request, res: Response) => {
       pin,
       password: hashPassword,
       account_balance: 0,
-      account_number: token
+      account_number
     });
     await user.save();
     
