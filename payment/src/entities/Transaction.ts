@@ -23,7 +23,8 @@ export class Transaction extends BaseEntity {
     @Column({nullable:true})
     status: string
 
-    @Column({type:'enum', enum:transactionType})
+    // @Column({type:'enum', enum:transactionType})
+    @Column()
     type: string
 
     @ManyToOne(

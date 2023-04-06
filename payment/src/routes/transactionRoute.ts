@@ -5,35 +5,68 @@ import { User } from "../entities/User";
 
 const route = express.Router();
 
-route.post("/api/:id/transaction", async (req: Request, res: Response) => {
-  try {
-    const { id } = req.params;
-    const userId = parseInt(id);
-    const { amount, type } = req.body;
-    const user = await User.findOne({ where: { id: userId } });
-    if (user) {
-      const newTransaction = Transaction.create({ amount, type, user });
-      await newTransaction.save();
-      if (type === transactionType.deposit) {
+// Deposit Money
+route.post(
+  "/api/:id/transaction/deposit",
+  async (req: Request, res: Response) => {
+    try {
+      const { id } = req.params;
+      const userId = parseInt(id);
+      const { amount, type } = req.body;
+      const user = await User.findOne({ where: { id: userId } });
+      if (user) {
+        const newTransaction = Transaction.create({ amount, type, user });
+        await newTransaction.save();
         const newBalance = amount + user.account_balance;
         user.account_balance = newBalance;
         newTransaction.status = transactionStatus.success;
         await newTransaction.save();
         await user.save();
         res.send(user);
-      } else if (type === transactionType.withdraw) {
-        if(req.body.pin !== user.pin) return res.status(400).json("incorrect pin")
-        if(user.account_balance < amount) return res.status(400).json("insuficient fund")
-        user.account_balance = user.account_balance - amount;
-        await user.save();
-        res.status(200).json(`${amount} withrawal successful`);
+      } else {
+        res.send("user not found");
       }
-    } else {
-      res.send("user not found");
+    } catch (error) {
+      res.status(500).json(error);
     }
-  } catch (error) {
-    res.status(500).json(error);
   }
-});
+);
+
+//Transfer Money
+route.post(
+  "/api/:id/transaction/transfer",
+  async (req: Request, res: Response) => {
+    try {
+      const { id } = req.params;
+      const userId = parseInt(id);
+      const { amount, type } = req.body;
+      const user = await User.findOne({ where: { id: userId } });
+      if (user) {
+        const newTransaction = Transaction.create({ amount, type, user });
+        await newTransaction.save();
+        const newBalance = user.account_balance - amount;
+        user.account_balance = newBalance;
+        newTransaction.status = transactionStatus.success;
+        await newTransaction.save();
+        await user.save();
+        const reciever = await User.findOne({
+          where: { id: req.body.recieverId },
+        });
+        const updatedBalance = reciever?.account_balance + amount;
+        reciever!.account_balance = updatedBalance;
+        await reciever!.save();
+        res.status(200).json({
+          message: `amount ${amount} has been successfully transfered to ${
+            reciever!.firstName
+          } ${reciever!.lastName}`,
+        });
+      } else {
+        res.send("user not found");
+      }
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  }
+);
 
 export default route;

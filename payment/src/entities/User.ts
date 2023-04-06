@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany, PrimaryColumn } from "typeorm"
 import { Transaction } from "./Transaction"
-import crypto from 'crypto'
+import {gen} from 'n-digit-token'
 
 
 
@@ -26,7 +26,8 @@ export class User extends BaseEntity {
     
     @Column()
     account_balance: number
-    @Column()
+
+    @Column() 
     account_number: string
 
 
