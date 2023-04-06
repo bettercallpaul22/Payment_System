@@ -1,6 +1,7 @@
 import { User } from "./../entities/User";
 import express, { Request, Response } from "express";
 import bcrypt from "bcrypt";
+import {gen} from 'n-digit-token'
 
 
 const route = express.Router();
@@ -9,6 +10,8 @@ route.post("/api/signup", async (req: Request, res: Response) => {
   try {
     const { firstName, lastName, email, pin, password } = req.body;
     const existingUser = await User.findOne({ where: { email } });
+    const token:string = gen(10)
+  
     if (existingUser) return res.status(400).json("email already taken");
     const salt = bcrypt.genSaltSync(10);
     const hashPassword = bcrypt.hashSync(password, salt);
@@ -19,9 +22,10 @@ route.post("/api/signup", async (req: Request, res: Response) => {
       pin,
       password: hashPassword,
       account_balance: 0,
-      account_number: "5643892662",
+      account_number: token
     });
     await user.save();
+    
     res.status(200).json("registration successful");
   } catch (error) {
     res.status(500).json(error);
@@ -37,10 +41,8 @@ route.post("/api/login", async (req: Request, res: Response) => {
     if (!encryptedPassword) {
       return res.status(400).json("invalid password");
     } else {
-      
-
-   
-      // return res.status(200).json({ msg: "login success", user });
+    
+     return res.status(200).json({ msg: "login success", user });
     }
   } catch (error) {
     res.status(500).json(error);

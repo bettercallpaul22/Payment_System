@@ -10,7 +10,7 @@ export const AppDataSource = new DataSource({
     host:'localhost',
     port:5432,
     username:'postgres',
-    password:'admin123',
+    password:'admin',
     database:'react_native_payment', 
     logging:false,
     synchronize:true,
