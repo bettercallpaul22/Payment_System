@@ -13,6 +13,7 @@ import Welcome from "./components/Welcome";
 import LoginSuccess from "./screens/LoginSuccess";
 import ChatScreen from "./screens/ChatScreen";
 import Transaction from "./screens/Transaction";
+import TransactionHistory from "./screens/TransactionHistory";
 
 
 const store = configureStore({
@@ -50,6 +51,9 @@ export default function App() {
           />
           <Stack.Screen name="Transaction" component={Transaction} 
            options={{ headerTitle: "Transfer to Bank", headerShown: true }}
+          />
+          <Stack.Screen name="TransactionHistory" component={TransactionHistory} 
+           options={{ headerTitle: "Transactions", headerShown: true }}
           />
           <Stack.Screen name="ChatScreen" component={ChatScreen} 
            options={{ headerTitle: "Chat", headerShown: true }}

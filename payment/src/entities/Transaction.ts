@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne, JoinColumn } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne, JoinColumn, CreateDateColumn } from "typeorm"
 import { User } from "./User"
 
 export enum transactionType {
@@ -26,6 +26,9 @@ export class Transaction extends BaseEntity {
     // @Column({type:'enum', enum:transactionType})
     @Column()
     type: string
+
+    @CreateDateColumn()
+    created_at:Date
 
     @ManyToOne(()=>User, user => user.transaction )
     @JoinColumn({name:'user_id' })

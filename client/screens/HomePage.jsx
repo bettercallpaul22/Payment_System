@@ -76,6 +76,7 @@ export const HomePage = () => {
                 alignItems: "center",
                 justifyContent: "center",
               }}
+              onPress={()=>{navigate.navigate("TransactionHistory")}}
             >
               <Text style={{ color: "white", textAlign: "center" }}>
                 Transaction History
@@ -167,7 +168,7 @@ export const HomePage = () => {
         </View>
         <Text style={{ fontWeight:'700', fontSize:18, marginLeft:10 }}>Recent transaction</Text>
         <ScrollView  >
-        <TransactionHistory/>
+     
       </ScrollView>
     </View>
   );
