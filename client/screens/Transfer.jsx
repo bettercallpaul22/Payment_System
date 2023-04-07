@@ -14,6 +14,8 @@ import {
   Fontisto,
 } from "@expo/vector-icons";
 import { TextInput } from "react-native";
+import InputField from "../components/InputField";
+import { TouchableOpacity } from "react-native";
 {
   /* <RefreshControl refreshing={refreshing} onRefresh={onRefresh} /> */
 }
@@ -22,34 +24,92 @@ const Transfer = () => {
   return (
     <View>
       <View style={styles.topView}>
-        <Text style={{fontWeight:'700', fontSize:18, letterSpacing:3, marginBottom:10}}>Transfer</Text>
-        <Text style={{ width:280, textAlign:'center', letterSpacing:1}}>
+        <Text
+          style={{
+            fontWeight: "700",
+            fontSize: 18,
+            letterSpacing: 3,
+            marginBottom: 10,
+          }}
+        >
+          Transfer
+        </Text>
+        <Text style={{ width: 280, textAlign: "center", letterSpacing: 1 }}>
           Please confirm and verify the account before you proceed to send
         </Text>
-        <Text style={{fontWeight:'600', fontSize:22, letterSpacing:3, marginTop:10}}>Balance: ₦20,000</Text> 
-        <View>
-          <AntDesign  name="right"  size={26} color="white" style={{ marginTop: 5 }} />
-          <Text>Send to beneficiary?</Text>
+        <Text
+          style={{
+            fontWeight: "600",
+            fontSize: 22,
+            letterSpacing: 3,
+            marginTop: 10,
+            color: "purple",
+          }}
+        >
+          Balance: ₦20,000
+        </Text>
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "flex-end",
+            marginTop: 10,
+          }}
+        >
+          <Ionicons name="person" size={24} color="purple" />
+          <Text style={{ fontSize: 16, marginLeft: 5 }}>
+            Send to beneficiary?
+          </Text>
         </View>
       </View>
 
-      <View>
-        <Text>Account Number</Text>
-        <TextInput
-        maxLength={10}
-        />
-      </View>
+      <InputField
+        keyboard="number-pad"
+        title="Account Number"
+        placeholder="Enter Account Number"
+        length={10}
+      />
+      <InputField title="Bank Name" keyboard="default" />
+      <InputField
+        title="Amount"
+        keyboard="number-pad"
+        placeholder="Enter Amount"
+        length={1000000000000000}
+      />
+      <InputField
+        keyboard="default"
+        title="Add Description"
+        placeholder="Enter Description"
+        length={500}
+      />
+      <TouchableOpacity
+        style={styles.button}
+      >
+        <Text style={{ color: "white", textAlign:'center', fontSize:20, letterSpacing:2 }}>Proceed</Text>
+      </TouchableOpacity>
     </View>
   );
 };
 
-export default Transfer; 
+export default Transfer;
 
 const styles = StyleSheet.create({
-  topView:{
-    display:'flex',
-    justifyContent:'center',
-    alignItems:'center', marginTop:10
+  topView: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 10,
+  },
 
-  }
+  button: {
+    width: 370,
+    backgroundColor: "purple",
+    height: 50,
+    borderRadius: 10,
+    marginTop: 40,
+    margin: 10,
+   display:'flex',
+   alignItems:'center',
+   justifyContent:'center'
+  },
 });

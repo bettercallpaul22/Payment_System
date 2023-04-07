@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
    
   },
   dashboard: {
-    backgroundColor: "#512D6D",
+    backgroundColor: "purple",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-evenly",
