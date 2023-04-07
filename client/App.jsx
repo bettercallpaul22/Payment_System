@@ -12,8 +12,9 @@ import SplashScreen from "./components/splashScreen";
 import Welcome from "./components/Welcome";
 import LoginSuccess from "./screens/LoginSuccess";
 import ChatScreen from "./screens/ChatScreen";
-import Transaction from "./screens/Transaction";
+// import Transaction from "./screens/Transaction";
 import TransactionHistory from "./screens/TransactionHistory";
+import Transfer from "./screens/Transfer";
 
 
 const store = configureStore({
@@ -49,7 +50,7 @@ export default function App() {
           <Stack.Screen name="HomePageScreen" component={TabNavigator} 
            options={{ headerTitle: "HomePage", headerShown: false }}
           />
-          <Stack.Screen name="Transaction" component={Transaction} 
+          <Stack.Screen name="Transfer" component={Transfer} 
            options={{ headerTitle: "Transfer to Bank", headerShown: true }}
           />
           <Stack.Screen name="TransactionHistory" component={TransactionHistory} 

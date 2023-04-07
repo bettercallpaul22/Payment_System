@@ -1,62 +1,9 @@
-import {
-  View,
-  Text,
-  SafeAreaView,
-  Image,
-  TouchableOpacity,
-  ImageBackground,
-  ScrollView,
-  FlatList,
-  Animated,
-  Dimensions,
-  StyleSheet,
-} from "react-native";
+import { StyleSheet, Text, View } from 'react-native'
+import React from 'react'
 
-import Ionicons from "@expo/vector-icons/Ionicons";
-
-import {
-  MaterialCommunityIcons,
-  MaterialIcons,
-  AntDesign,
-  FontAwesome5,
-  FontAwesome,
-  Entypo,
-  Octicons,
-  Fontisto,
-} from "@expo/vector-icons";
-import { data } from "../data/data";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { clearLoginStatus, loadState } from "../features/UserSlice";
-import Header from "../components/Header";
-import { useNavigation } from "@react-navigation/native";
-import TransactionHistory from "./TransactionHistory";
-
-export const HomePage = () => {
-  const navigate = useNavigation();
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(loadState());
-  }, []);
-  const user = useSelector((state) => state.user);
-
+const Dashboard = () => {
   return (
-    <View style={styles.mainContainer}>
-      {/* <Header firstName={user.firstName} /> */}
-      <View style={styles.ProfileHeader}>
-        <View style={{display:'flex', flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
-          <Ionicons name="person" size={35} color="black" />
-          <View style={{ marginLeft:10}}>
-            <Text style={{fontWeight:'700'}}>Hey Paul</Text>
-            <Text>welcome back</Text>
-          </View>
-        </View>
-        <View>
-          <Ionicons name="notifications" size={35} color="gray" />
-        </View>
-      </View>
-     
-        <View style={styles.dashboard}>
+    <View style={styles.dashboard}>
           <View
             style={{
               display: "flex",
@@ -85,7 +32,7 @@ export const HomePage = () => {
                 name="right"
                 size={16}
                 color="white"
-                style={{ marginTop: 5 }} 
+                style={{ marginTop: 5 }}
               />
             </TouchableOpacity>
           </View>
@@ -141,7 +88,7 @@ export const HomePage = () => {
               }}
             >
               <TouchableOpacity
-                onPress={() => navigate.navigate("Transfer")}
+                onPress={() => navigate.navigate("Transaction")}
               >
                 <MaterialCommunityIcons
                   name="bank-transfer-out"
@@ -166,54 +113,25 @@ export const HomePage = () => {
             </View>
           </View>
         </View>
-        <Text style={{ fontWeight:'700', fontSize:18, marginLeft:10 }}>Recent transaction</Text>
-        <ScrollView  >
-     
-      </ScrollView>
-    </View>
-  );
-};
+  )
+}
+
+export default Dashboard
 
 const styles = StyleSheet.create({
-  mainContainer: {
-    display: "flex",
-    flex: 1,
-    marginTop: 30,
-  },
 
-  ProfileHeader: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    height: 130, 
-    marginHorizontal:10,
-   
-  },
-  dashboard: {
-    backgroundColor: "#512D6D",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-evenly",
-    alignItems: "center",
-    height: 160,
-
-    width: 370,
-    margin: 10,
-    borderRadius: 10,
-    marginTop: 2,
-  },
-
-  session: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    height: 120,
-    width: 170,
-    backgroundColor: "#11698E",
-    borderRadius: 10,
-  },
-});
-
-export default HomePage;
+    dashboard: {
+        backgroundColor: "#512D6D",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-evenly",
+        alignItems: "center",
+        height: 160,
+    
+        width: 370,
+        margin: 10,
+        borderRadius: 10,
+        marginTop: 2,
+      },
+    
+})

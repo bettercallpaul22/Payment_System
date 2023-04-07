@@ -6,12 +6,18 @@ import { useState } from "react";
 
 const TransactionHistory = () => {
   const [transaction, setTransaction] = useState([]);
+  const url = "http://192.168.116.161:5000/api/4/transaction"
   useEffect(() => {
-    const fetch_transactions = ()=>{
-      axios
-        .get("http://192.168.116.161:5000/api/4/transaction")
-        .then((resp) => setTransaction(resp.data))
-        .catch((err) => console.log(err));
+    const fetch_transactions = async()=>{
+      // axios
+      //   .get("http://192.168.116.161:5000/api/4/transaction")
+      //   .then((resp) => setTransaction(resp.data))
+      //   .catch((err) => console.log(err));
+      const {data, meta} = await axios.get(url)
+      if(meta){
+        console.log('pending')
+      }
+      setTransaction(data)
     }
     fetch_transactions()
   }, []);
