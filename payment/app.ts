@@ -3,8 +3,9 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import { AppDataSource } from './src/database/DataSource'
-import userRoute from './src/routes/UserRoutes'
-import transactionRoute from './src/routes/transactionRoute'
+import loginRoute from './src/routes/user.route'
+import signupRoute from './src/routes/user.route'
+import transactions from './src/routes/transaction.route'
 
 dotenv.config()
 
@@ -16,9 +17,16 @@ app.use(cors())
  app.listen(PORT, ()=>{  
     console.log(`server running on port ${PORT}`)
  })
- app.use(userRoute)
- app.use(transactionRoute)
-AppDataSource.initialize()
-.then(()=> console.log('App is connected to postgres database'))
-.catch((err)=> console.log({msg:err}))
+ AppDataSource.initialize()
+ .then(()=> console.log('App is connected to postgres database'))
+ .catch((err)=> console.log({msg:err}))
+ 
+
+ // User auth
+ app.use('/api', loginRoute)
+ app.use('/api', signupRoute)
+
+ // Transactions
+ app.use('/api', transactions)
+
 

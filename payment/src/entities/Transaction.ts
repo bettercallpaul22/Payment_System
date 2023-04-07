@@ -27,13 +27,8 @@ export class Transaction extends BaseEntity {
     @Column()
     type: string
 
-    @ManyToOne(
-        ()=>User,
-        user => user.transaction
-    )
-    @JoinColumn({
-        name:'user_id'
-    })
+    @ManyToOne(()=>User, user => user.transaction )
+    @JoinColumn({name:'user_id' })
     user:User
 
 }

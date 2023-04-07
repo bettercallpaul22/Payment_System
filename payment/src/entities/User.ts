@@ -35,7 +35,7 @@ export class User extends BaseEntity {
 
     @OneToMany(
         ()=>Transaction,
-        transaction => transaction.user 
+        transaction => transaction.user ,{onDelete:'CASCADE'}
     )
     transaction: Transaction[]
 
