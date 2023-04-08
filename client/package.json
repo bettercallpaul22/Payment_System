@@ -32,6 +32,7 @@
     "react-native": "0.70.8",
     "react-native-actions-sheet": "^0.8.29",
     "react-native-dropdown-picker": "^5.4.6",
+    "react-native-dropdown-select-list": "^2.0.4",
     "react-native-elements": "^3.4.3",
     "react-native-flags": "^1.0.0",
     "react-native-gesture-handler": "~2.8.0",
