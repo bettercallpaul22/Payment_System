@@ -63,25 +63,10 @@ const Transfer = () => {
         </View>
       </View>
 
-      <InputField
-        keyboard="number-pad"
-        title="Account Number"
-        placeholder="Enter Account Number"
-        length={10}
-      />
-      <InputField title="Bank Name" keyboard="default" />
-      <InputField
-        title="Amount"
-        keyboard="number-pad"
-        placeholder="Enter Amount"
-        length={1000000000000000}
-      />
-      <InputField
-        keyboard="default"
-        title="Add Description"
-        placeholder="Enter Description"
-        length={500}
-      />
+      <InputField />
+      
+   
+     
       <TouchableOpacity
         style={styles.button}
       >
