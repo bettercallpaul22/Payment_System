@@ -38,7 +38,7 @@ export default function App() {
           {/* <Stack.Screen name="Welcome" component={Welcome}  
           options={{ headerShown: false }}
           /> */}
-          {/* <Stack.Screen name="RegisterScreen" component={Register} 
+          <Stack.Screen name="RegisterScreen" component={Register} 
            options={{ headerTitle: "Register", headerShown: false }}
           />
           <Stack.Screen name="LoginScreen" component={Login} 
@@ -46,7 +46,7 @@ export default function App() {
           />
           <Stack.Screen name="LoginSuccess" component={LoginSuccess} 
            options={{ headerTitle: "Login", headerShown: false }}
-          /> */}
+          />
           <Stack.Screen name="HomePageScreen" component={TabNavigator} 
            options={{ headerTitle: "HomePage", headerShown: false }}
           />

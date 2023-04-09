@@ -105,7 +105,7 @@ export const HomePage = () => {
                 marginRight: 30,
               }}
             >
-              284,566
+              0000000
             </Text>
             <TouchableOpacity>
               <Entypo name="eye-with-line" size={24} color="white" />
