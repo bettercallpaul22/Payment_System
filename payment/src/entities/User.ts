@@ -17,6 +17,9 @@ export class User extends BaseEntity {
     
     @Column()
     email: string
+    
+    @Column()
+    bank: string
 
     @Column()
     pin: number

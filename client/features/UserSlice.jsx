@@ -1,7 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
-//import { AsyncStorage } from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+// import { AsyncStorage } from "react-native";
 
 let initialState = {
   //getting our token from localStorage
@@ -10,6 +11,7 @@ let initialState = {
   firstName: "",
   lastName: "",
   email: "",
+  bank: "",
   registerStatus: "",
   registerError: "",
   loginStatus: "",
@@ -21,11 +23,13 @@ export const register = createAsyncThunk(
   async (values, { rejectWithValue }) => {
     try {
       const resp = await axios.post(
-        "http://192.168.155.12:5000/api/register",
+        "http://192.168.116.251:5000/api/signup",
         {
-          email: values.email,
           firstName: values.firstName,
           lastName: values.lastName,
+          email: values.email,
+          bank: values.bank,
+          pin: values.pin,
           password: values.password,
         }
       );
@@ -41,13 +45,13 @@ export const login = createAsyncThunk(
   async (values, { rejectWithValue }) => {
     try {
       const resp = await axios.post(
-        "http://192.168.155.12:5000/api/login",
+        "http://192.168.116.251:5000/api/login",
         {
           email: values.email,
           password: values.password,
         }
       );
-      // await AsyncStorage.setItem("token", resp.data);
+       await AsyncStorage.setItem("token", resp.data);
       return resp.data;
     } catch (error) {
       return rejectWithValue(error.response.data);

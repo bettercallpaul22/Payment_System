@@ -7,18 +7,13 @@ import {
   TouchableOpacity,
   StyleSheet,
   Switch,
-  KeyboardAvoidingView,
-  Keyboard
+
 } from "react-native";
-import { useFormik } from "formik";
-import Ionicons from "@expo/vector-icons/Ionicons";
+
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../features/UserSlice";
 import { useNavigation, Link } from "@react-navigation/native";
 import { useCallback, useEffect, useState } from "react";
-import { registerSchema } from "../schema/schema";
-import RegisterSuccess from "../components/RegisterSuccess";
-import DropDownRegister from "../components/DropDownRegister";
 import { SelectList } from "react-native-dropdown-select-list";
 import axios from "axios";
 import { ScrollView } from "react-native";
@@ -31,6 +26,7 @@ const Register = () => {
     };
     fetch_banks();
   }, []);
+  const userAuth = useSelector((state)=> state.user)
   const [isEnabledPassword, setIsEnabledPassword] = useState(false);
   const [isEnabledPin, setIsEnabledPin] = useState(false);
   const togglePasswordSwitch = () =>
@@ -43,30 +39,26 @@ const Register = () => {
  
   const user = useSelector((state) => state.user);
   const [person, setPerson] = useState({
-    
-      
         firstName:"",
         lastName: "",
         email: "",
         bank: selected,
         pin: "",
         password: "",
-      
-    
   });
 
   const handlePress = () => {
-    // dispatch(register(values));
+     dispatch(register(person));
   };
 
   if (user.registerStatus === "success") {
     setTimeout(() => {
       navigate.navigate("LoginScreen");
-      // resetForm(values);
+     
     }, 200);
   }
 
-  console.log(person);
+  console.log(userAuth);
   return (
     <ScrollView>
     <View style={styles.mainContainer}>
@@ -83,7 +75,7 @@ const Register = () => {
         <View>
           <Text style={{ letterSpacing: 2 }}>first name</Text>
           <TextInput
-         
+        
             style={styles.fistLastName}
             placeholder="Enter first name"
             onChangeText={(value) => setPerson({...person, firstName:value})}
@@ -201,16 +193,16 @@ const Register = () => {
           secureTextEntry={!isEnabledPassword}
         />
       </View>
-      {user.registerStatus !== "success" ? (
-        <Text style={{ color: "red", marginTop: 5 }}>{user.registerError}</Text>
+      {userAuth.registerStatus !== "success" ? (
+        <Text style={{ color: "red", marginTop: 5, fontSize:18 }}>{user.registerError}</Text>
       ) : (
-        <RegisterSuccess />
+       <Text style={{ color: "green", fontSize: 22 }}>Register successful</Text>
       )}
       <TouchableOpacity onPress={handlePress} style={styles.createFreeAcc}>
         {user.registerStatus === "pending" ? (
           <ActivityIndicator size="large" />
         ) : (
-          <Text style={{ color: "white", fontSize: 22 }}>
+          <Text style={{ color: "white", fontSize: 22 }}> 
             Create my free account
           </Text>
         )}
