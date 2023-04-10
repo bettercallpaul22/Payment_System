@@ -6,7 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 let initialState = {
   //getting our token from localStorage
-  //token: AsyncStorage.getItem("token"),
+  token: AsyncStorage.getItem("token"),
   id: "",
   firstName: "",
   lastName: "",
@@ -29,6 +29,7 @@ export const register = createAsyncThunk(
           lastName: values.lastName,
           email: values.email,
           bank: values.bank,
+         
           pin: values.pin,
           password: values.password,
         }
@@ -70,10 +71,12 @@ export const userSlice = createSlice({
         return {
           ...state,
           id: user.id,
-          email: user.email,
           firstName: user.firstName,
           lastName: user.lastName,
-          password: user.password,
+          email: user.email,
+          bank: user.bank,
+          account_number: user.account_number,
+          account_balance: user.account_balance,
           loginStatus: "",
         };
       }
@@ -84,8 +87,11 @@ export const userSlice = createSlice({
         token: "",
         id: "",
         email: "",
-        firstName: "",
+        bank: "",
+        // firstName: "",
         lastName: "",
+        account_number:"",
+        account_balance:"",
         registerStatus: "",
         registerError: "",
         loginStatus: "",

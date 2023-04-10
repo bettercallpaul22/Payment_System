@@ -47,7 +47,7 @@ export const HomePage = () => {
         <View style={{display:'flex', flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
           <Ionicons name="person" size={35} color="black" />
           <View style={{ marginLeft:10}}>
-            <Text style={{fontWeight:'700'}}>Hey Paul</Text>
+            <Text style={{fontWeight:'700'}}>{user.firstName}</Text>
             <Text>welcome back</Text>
           </View>
         </View>
@@ -105,7 +105,7 @@ export const HomePage = () => {
                 marginRight: 30,
               }}
             >
-              0000000
+              {user.account_balance}
             </Text>
             <TouchableOpacity>
               <Entypo name="eye-with-line" size={24} color="white" />

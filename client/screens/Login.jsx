@@ -2,7 +2,6 @@ import {
   ActivityIndicator,
   View,
   Text,
-  SafeAreaView,
   TextInput,
   TouchableOpacity,
   StyleSheet,
@@ -10,7 +9,7 @@ import {
 } from "react-native";
 
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../features/UserSlice";
+import { loadState, login } from "../features/UserSlice";
 import { useNavigation, Link } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { ScrollView } from "react-native";
@@ -38,12 +37,13 @@ const Login = () => {
   };
 
   if (user.loginStatus === "success") {
+    dispatch(loadState())
     setTimeout(() => {
-      // navigate.navigate("HomeScreen");
-    }, 200);
+       navigate.navigate("Home");
+    }, 500);
   }
 
-  console.log(userAuth);
+  // console.log(userAuth);
   return (
     <ScrollView>
       <View style={styles.mainContainer}>
@@ -134,7 +134,7 @@ const Login = () => {
             don't have an account?{" "}
           </Text>
           <Link
-            to={{ screen: "RegisterScreen" }}
+            to={{ screen: "Register" }}
             style={{ color: "pink", marginTop: 20 }}
           >
             <Text style={{ color: "red", fontSize: 18 }}>

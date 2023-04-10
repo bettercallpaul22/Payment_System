@@ -5,7 +5,7 @@ import dotenv from 'dotenv'
 import { AppDataSource } from './src/database/DataSource'
 import loginRoute from './src/routes/user.route'
 import signupRoute from './src/routes/user.route'
-import transactions from './src/routes/transaction.route'
+import transactions from './src/routes/transaction.route' 
 
 dotenv.config()
 

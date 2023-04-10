@@ -1,7 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { configureStore } from "@reduxjs/toolkit";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import UserSlice from "./features/UserSlice";
 import TabNavigator from "./src/components/TabNavigator";
 // import LottieStartScreen from "./src/components/LottieStartScreen";
@@ -27,7 +27,8 @@ const Stack = createNativeStackNavigator();
 
 
 export default function App() {
-  return (
+// console.log(store.getState()) 
+  return (   
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator >
@@ -38,17 +39,14 @@ export default function App() {
           {/* <Stack.Screen name="Welcome" component={Welcome}  
           options={{ headerShown: false }}
           /> */}
-          {/* <Stack.Screen name="RegisterScreen" component={Register} 
+          <Stack.Screen name="Register" component={Register} 
            options={{ headerTitle: "Register", headerShown: false }}
-          /> */}
-          <Stack.Screen name="LoginScreen" component={Login} 
+          />
+          <Stack.Screen name="Login" component={Login} 
            options={{ headerTitle: "Login", headerShown: false }}
           />
-          <Stack.Screen name="LoginSuccess" component={LoginSuccess} 
-           options={{ headerTitle: "Login", headerShown: false }}
-          />
-          <Stack.Screen name="HomePageScreen" component={TabNavigator} 
-           options={{ headerTitle: "HomePage", headerShown: false }}
+          <Stack.Screen name="Home" component={TabNavigator} 
+           options={{ headerTitle: "Home", headerShown: false }}
           />
           <Stack.Screen name="Transfer" component={Transfer} 
            options={{ headerTitle: "Transfer to Bank", headerShown: true }}

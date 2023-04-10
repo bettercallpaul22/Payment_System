@@ -17,14 +17,16 @@ import { useCallback, useEffect, useState } from "react";
 import { SelectList } from "react-native-dropdown-select-list";
 import axios from "axios";
 import { ScrollView } from "react-native";
+import { bankList } from "../data/bankList";
 
 const Register = () => {
   useEffect(() => {
-    const fetch_banks = async () => {
-      const resp = await axios.get("https://nigerianbanks.xyz");
-      setBankData(resp.data);
-    };
-    fetch_banks();
+    // const fetch_banks = async () => {
+    //   const resp = await axios.get("https://nigerianbanks.xyz");
+    //   setBankData(resp.data);
+    // };
+    // fetch_banks();
+    // setBankData(resp.data);
   }, []);
   const userAuth = useSelector((state)=> state.user)
   const [isEnabledPassword, setIsEnabledPassword] = useState(false);
@@ -35,7 +37,7 @@ const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigation();
   const [selected, setSelected] = useState("");
-  const [bankData, setBankData] = useState([]);
+  // const [bankData, setBankData] = useState([]);
  
   const user = useSelector((state) => state.user);
   const [person, setPerson] = useState({
@@ -52,14 +54,14 @@ const Register = () => {
   };
 
   if (user.registerStatus === "success") {
-    setTimeout(() => {
-      navigate.navigate("LoginScreen");
+    setTimeout(() => { 
+       navigate.navigate("Login");
      
-    }, 200);
+    }, 600);
   }
 
-  console.log(userAuth);
-  return (
+  // console.log(userAuth); 
+  return ( 
     <ScrollView>
     <View style={styles.mainContainer}>
       <View tyle={styles.header}>
@@ -71,11 +73,12 @@ const Register = () => {
         </Text>
       </View>
 
+{/* FirstName */}
       <View style={styles.formNames}>
         <View>
           <Text style={{ letterSpacing: 2 }}>first name</Text>
           <TextInput
-        
+          textContentType="emailAddress"
             style={styles.fistLastName}
             placeholder="Enter first name"
             onChangeText={(value) => setPerson({...person, firstName:value})}
@@ -103,7 +106,7 @@ const Register = () => {
       <View style={{ width: 280, borderColor: "purple", marginRight: 70 }}>
         <SelectList
            setSelected={(val) => setSelected(val)}
-          data={bankData.map((bank) => bank.name)}
+          data={bankList.map((bank) => bank.name)}
           save="name"
           searchPlaceholder="Search Bank"
           search={false}
@@ -221,7 +224,7 @@ const Register = () => {
           already have an account?{" "}
         </Text>
         <Link
-          to={{ screen: "LoginScreen" }}
+          to={{ screen: "Login" }}
           style={{ color: "pink", marginTop: 20 }}
         >
           <Text style={{ color: "red", fontSize: 22 }}>
